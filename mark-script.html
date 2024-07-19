@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mark e Script</title>
+</head>
+<body>
+    <input type="text" id="busca"><br>
+    <p id="descricao">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam lorem neque, mollis nec iaculis sit amet, elementum id ante. 
+        Donec diam quam, semper sit amet consectetur at, sollicitudin vitae eros. Ut sed nunc eget dolor bibendum eleifend. 
+        Nullam tristique tempus erat, nec egestas neque aliquam ullamcorper. Mauris vel lectus sed libero laoreet cursus. Cras interdum iaculis iaculis. 
+        Nullam euismod, eros a facilisis tincidunt, libero quam maximus massa, eget bibendum nisi enim at magna. 
+        Aliquam nec ante vulputate, hendrerit urna sit amet, lacinia mi. Sed aliquet tellus in condimentum eleifend. 
+        Donec sit amet bibendum dolor. Praesent quis imperdiet magna, id vulputate velit. Vivamus porta pharetra sem sed congue. 
+        Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nunc imperdiet rhoncus vulputate. 
+        Integer bibendum posuere urna sed molestie. Nullam id erat sapien.
+    </p>
+    <script>
+        var searchField = document.getElementById('busca');
+        var descriptionObject = document.getElementById('descricao'); // Corrigido
+        var textToSearch = descriptionObject.innerHTML;
+
+        function realizaBusca(busca){
+            if (!busca) {
+                descriptionObject.innerHTML = textToSearch;
+                return;
+            }
+            const regex = new RegExp(`(${busca})(?!(.(?!<mark>))*</mark>)+`, 'ig');
+            descriptionObject.innerHTML = textToSearch.replace(regex, `<mark>$1</mark>`);
+        }
+
+        searchField.addEventListener('keyup', (e) => realizaBusca(e.target.value));
+    </script>
+</body>
+</html>
